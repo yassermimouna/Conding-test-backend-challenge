@@ -5,6 +5,7 @@
 - [About](#About)
 - [instructions](#instructions)
 - [Usage](#Usage)
+- [Tests](#Tests)
 
 # About
 
@@ -26,3 +27,7 @@ This project is a Node Js App for fetching artists by name and return results to
 Example : i want to search for artist with name `Eminem` and store the result in file named `eminemSearchResult.csv` .
 
 the URL will be   `localhost:3001/artist/eminem/eminemSearchResult`  .
+
+# Tests
+
+- You can test this project Api via Swagger :  `localhost:PORT/swagger`  .
