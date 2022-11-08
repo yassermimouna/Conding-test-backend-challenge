@@ -1,0 +1,119 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Conding-test-backend-challenge",
+        "description": "This project is a Node Js App for fetching artists from an open API endpoint by name and return results to the user and create CSV file containing the result.",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "servers": [
+        {
+            "url": "/",
+            "description": "Local Developement Server"
+        }
+    ],
+    "tags": [
+        {
+            "name": "Artists",
+            "description": "API for artist in the system"
+        }
+    ],
+    "consumes": [
+        "string"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/artist/{artistName}/{fileName}": {
+            "parameters": [
+                {
+                    "name": "artistName",
+                    "in": "path",
+                    "required": true,
+                    "description": "Name of the artist that we want to look for",
+                    "type": "string"
+                },
+                {
+                    "name": "fileName",
+                    "in": "path",
+                    "required": true,
+                    "description": "file name that will be created containing the result",
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Artists"
+                ],
+                "summary": "Get artist with given name",
+                "responses": {
+                    "200": {
+                        "description": "successfull result !",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/definitions/IArtistResponse"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/definitions/IErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "internal error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/definitions/IErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "IArtistResponse": {
+            "type": "object",
+            "properties": {
+                "results": {
+                    "type": "object",
+                    "properties": {
+                        "artistmatches": {
+                            "type": "object",
+                            "properties": {
+                                "artist": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "IErrorResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "number"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
